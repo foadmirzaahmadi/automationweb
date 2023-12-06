@@ -1,4 +1,4 @@
-from automationweb.Locators import *
+from automationweb.Pages.Locators import *
 class MainPage:
     def __init__(self,driver):
         self.driver=driver
