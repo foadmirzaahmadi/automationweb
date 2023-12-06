@@ -6,13 +6,13 @@ import os
 from pathlib import Path
 from selenium.webdriver.chrome.options import Options
 
+
 chrome_options1 = Options()
 # chrome_options1.add_argument("--incognito")
-chrome_options1.add_argument("--headless")
+# chrome_options1.add_argument("--incognito")
 
-driver = webdriver.Chrome(options=chrome_options1)
-driver.get("http://yahoo.com")
-sleep(3)
+driver = webdriver.Chrome()
+
 # driver.find_element('name','p')
 # driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
 # sleep(2)
