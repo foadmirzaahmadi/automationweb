@@ -2,12 +2,11 @@ from selenium import webdriver
 from time import sleep
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
-
+from selenium.webdriver.common.by import By
 driver = webdriver.Chrome()
 acions = ActionChains(driver=driver)
 driver.maximize_window()
 driver.implicitly_wait(3)
-driver.get('https://www.imdb.com/chart/top/')
 
 # element = driver.find_element('link text','200. Sherlock Jr.')
 # print(element)
@@ -52,3 +51,39 @@ driver.get('https://www.imdb.com/chart/top/')
 # element = driver.find_element('link text','205. Mary and Max')
 # element.location_once_scrolled_into_view
 # sleep(5)
+
+# driver.get('https://material.angular.io/components/categories')
+# el =driver.find_element(By.CLASS_NAME,'mdc-button__label')
+# attr = el.text
+# print(attr)
+
+
+# el= driver.find_element(By.XPATH,"//*[@class='mdc-button__label' and text()='Components']/..")
+# attr = el.get_attribute('class')
+# assert  'selected' in attr, 'element is selected'
+# print(attr)
+# el2 = driver.find_element(By.XPATH,"//*[@class='mdc-button__label' and text()='CDK']/..").click()
+# sleep(2)
+# attr2 = el.get_attribute('class')
+# print(attr2)
+# assert  'selected' not in attr2 , 'element is not selected'
+# sleep(3)
+
+# driver.get('https://material.angular.io/components/slide-toggle/examples')
+# el = driver.find_element(By.ID,'mat-radio-2')
+# el3 = driver.find_element(By.ID,'mat-radio-3')
+# assert 'checked' in el3.get_attribute('class')
+# attr1 = el.get_attribute('class')
+# assert 'checked' not in attr1
+# el.click()
+# attr2 = el.get_attribute('class')
+# assert 'checked' in attr2
+# assert 'checked' not in el3.get_attribute('class')
+
+
+driver.get('https://material.angular.io/components/slide-toggle/examples')
+el1 = driver.find_element(By.ID,'mat-mdc-slide-toggle-1')
+assert 'checked' not in el1.get_attribute('class')
+el1.click()
+assert 'checked' in el1.get_attribute('class')
+sleep(5)
