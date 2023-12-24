@@ -55,11 +55,12 @@ acions = ActionChains(driver=driver)
 # acions.drag_and_drop(el1,el2).perform()
 # sleep(3)
 
-driver.get('https://trytestingthis.netlify.app/')
+# driver.get('https://trytestingthis.netlify.app/')
 
+
+driver.get('https://trytestingthis.netlify.app/')
 offset = driver.find_element('xpath',"//*[text()='Lets you select only one option']").location
-
-driver.get('https://trytestingthis.netlify.app/')
 driver.find_element('id','option').click()
+sleep(5)
 acions.move_by_offset(offset['x'],offset['y']).click().perform()
 sleep(4)
