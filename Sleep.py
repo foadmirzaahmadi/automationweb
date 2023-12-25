@@ -3,9 +3,8 @@ from time import sleep
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support import expected_conditions as EC
 
 driver = webdriver.Chrome()
 driver.implicitly_wait(1)
@@ -62,34 +61,59 @@ driver.implicitly_wait(1)
 # wait_unitl_element_is_enable(By.ID,'enabled_target',5)
 # print("element enable is now!")
 
-
-def wait_unitl_element_is_visible(selector, locator, timeout):
-    for i in range(timeout * 2):
-        try:
-            element = driver.find_element(selector, locator)
-
-            assert element.is_displayed()
-            print("test passed")
-            return
-        except:
-            sleep(0.5)
-
-def wait_unitl_element_is_invisible(selector, locator, timeout):
-    for i in range(timeout * 2):
-        try:
-            element = driver.find_element(selector, locator)
-
-            assert not element.is_displayed()
-            return
-        except:
-            sleep(0.5)
+#
+# def wait_unitl_element_is_visible(selector, locator, timeout):
+#     for i in range(timeout * 2):
+#         try:
+#             element = driver.find_element(selector, locator)
+#
+#             assert element.is_displayed()
+#             print("test passed")
+#             return
+#         except:
+#             sleep(0.5)
+#
+# def wait_unitl_element_is_invisible(selector, locator, timeout):
+#     for i in range(timeout * 2):
+#         try:
+#             element = driver.find_element(selector, locator)
+#
+#             assert not element.is_displayed()
+#             return
+#         except:
+#             sleep(0.5)
 
 #visibility_target
 
-driver.get('https://play1.automationcamp.ir/expected_conditions.html')
-trigger =driver.find_element(By.ID,'visibility_trigger')
-trigger.location_once_scrolled_into_view
-print(driver.find_element(By.ID,"visibility_target").is_displayed())
-trigger.click()
-wait_unitl_element_is_visible(By.ID,"visibility_target",6)
-print(driver.find_element(By.ID,"visibility_target").is_displayed())
+# driver.get('https://play1.automationcamp.ir/expected_conditions.html')
+# trigger =driver.find_element(By.ID,'visibility_trigger')
+# trigger.location_once_scrolled_into_view
+# print(driver.find_element(By.ID,"visibility_target").is_displayed())
+# trigger.click()
+# wait_unitl_element_is_visible(By.ID,"visibility_target",6)
+# print(driver.find_element(By.ID,"visibility_target").is_displayed())
+
+
+# driver.get('https://play1.automationcamp.ir/expected_conditions.html')
+# trigger = driver.find_element(By.ID,"enabled_trigger")
+# trigger.location_once_scrolled_into_view
+# trigger.click()
+# wait = WebDriverWait(driver,5)
+# element = wait.until(EC.element_to_be_clickable((By.ID,"enabled_target")))
+# print(element)
+
+
+#wait_until_page_is_loaded
+def wait_until_page_loaded(timeout=10):
+    for i in range (timeout*2):
+        try :
+            state =driver.execute_script(" return document.readyState")
+            assert state == 'complete'
+            print("state is:" + str(state))
+            return
+        except:
+            sleep(0.5)
+
+
+driver.get('https://archive.org/details/audio_bookspoetry')
+wait_until_page_loaded()
