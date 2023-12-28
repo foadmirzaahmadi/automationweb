@@ -10,7 +10,9 @@ driver.implicitly_wait(1)
 alert = Alert(driver)
 actions = ActionChains(driver)
 # driver.get('https://the-internet.herokuapp.com/javascript_alerts')
-driver.get('https://material.angular.io/components/snack-bar/examples')
+# driver.get('https://material.angular.io/components/snack-bar/examples')
+driver.get('https://material.angular.io/components/tooltip/examples#tooltip-message')
+
 
 # Get_Text_alert
 # driver.find_element(By.XPATH,"//button[text()='Click for JS Alert']").click()
@@ -56,18 +58,51 @@ driver.get('https://material.angular.io/components/snack-bar/examples')
 #
 # snack bar
 
-input = driver.find_element(By.ID, "mat-input-4")
-input.clear()
-input.send_keys(1)
-driver.find_element(By.XPATH,
-                    "//*[@class ='mdc-button__label' and normalize-space(text())='Pizza party']//ancestor::button").click()
+# input = driver.find_element(By.XPATH, "//input[contains(@class,'mat-mdc-input-element ng-tns-c1798928316-3')]")
+# input.clear()
+# input.send_keys(1)
+# driver.find_element(By.XPATH,
+#                     "//*[@class ='mdc-button__label' and normalize-space(text())='Pizza party']//ancestor::button").click()
 
 # 1:
-driver.find_element(By.XPATH, "//*[@class='cdk-overlay-container']//*[contains(text(),'Pizza party')")
+# driver.find_element(By.XPATH, "//*[@class='cdk-overlay-container']//*[contains(text(),'Pizza party')]")
+# sleep(3)
+# print("test passed")
+# 2:
+# driver.find_element(By.XPATH, "//*[@class='cdk-overlay-container']/following::*[contains(text(),'Pizza party')]")
 
-# # 2:
-# driver.find_element(By.XPATH, "//*[@class='cdk-overlay-container']/following::*[contains(text(),'Pizza party')")
-#
 # #3:
 # dom =driver.page_source
 # print(dom)
+# driver.find_element(By.XPATH,"//*[snack-bar-annotated-component-example-snack]")
+# sleep(3)
+# print("test passed")
+
+
+# tooltip message
+
+def check_tooltip_visible(elemets: list, check_text):
+    for el in elemets:
+        try:
+            text = el.text
+            assert text == check_text
+            return
+        except:
+            pass
+    raise Exception("tooltip message cannot found")
+
+
+input1 = driver.find_element(By.XPATH,
+                             "(//label[contains(@class,'mdc-floating-label mat-mdc-floating-label')]/following-sibling::input)[3]")
+input1.clear()
+input1.send_keys("test foad")
+hover_element = driver.find_element(By.XPATH,
+                                    '(//*[@class="mat-mdc-tooltip-trigger mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base"])[4]')
+actions.move_to_element(hover_element).perform()
+tooltip_element = driver.find_element(By.XPATH, "//*[@class='cdk-overlay-container']/descendant::*")
+check_tooltip_visible(tooltip_element, "test foad")
+assert len(tooltip_element) > 0
+actions.move_to_element(input1).perform()
+assert len(tooltip_element) == 0
+sleep(2)
+print("test is passed")
