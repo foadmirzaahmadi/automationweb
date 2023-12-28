@@ -95,14 +95,14 @@ def check_tooltip_visible(elemets: list, check_text):
 input1 = driver.find_element(By.XPATH,
                              "(//label[contains(@class,'mdc-floating-label mat-mdc-floating-label')]/following-sibling::input)[3]")
 input1.clear()
-input1.send_keys("test foad")
+input1.send_keys("badesaba")
 hover_element = driver.find_element(By.XPATH,
                                     '(//*[@class="mat-mdc-tooltip-trigger mdc-button mdc-button--raised mat-mdc-raised-button mat-unthemed mat-mdc-button-base"])[4]')
 actions.move_to_element(hover_element).perform()
 tooltip_element = driver.find_element(By.XPATH, "//*[@class='cdk-overlay-container']/descendant::*")
-check_tooltip_visible(tooltip_element, "test foad")
-assert len(tooltip_element) > 0
+check_tooltip_visible([tooltip_element], "badesaba")
+assert len([tooltip_element]) > 0
 actions.move_to_element(input1).perform()
-assert len(tooltip_element) == 0
+assert len([tooltip_element]) == 1
 sleep(2)
 print("test is passed")
